@@ -150,6 +150,25 @@ C
 C
 C=============================================================================
 C
+      INTEGER I0
+C
+      DO 101 I0 = 0, 20
+         PRINT *, 'IDV=', I0
+         CALL MAIN_LOOP(I0)
+         PRINT *, ''
+ 101  CONTINUE
+C
+      STOP
+      END
+C
+C
+C-----------------------------------------------------------------------------
+C
+      SUBROUTINE  MAIN_LOOP(IDV_NUM)
+C
+      INTEGER  IDV_NUM
+      CHARACTER(LEN=32) OUTPUT_FNAME
+C
 C
 C  MEASUREMENT AND VALVE COMMON BLOCK
 C
@@ -346,13 +365,18 @@ C
       DO 100 I = 1, 20
           IDV(I) = 0
  100  CONTINUE
-C      IDV(20)=1	
+C
+      IF ((1 <= IDV_NUM) .AND. (IDV_NUM <= 20)) THEN
+         IDV(IDV_NUM) = 1
+      ENDIF
 C
 C
+      WRITE(UNIT=OUTPUT_FNAME, FMT=2301) IDV_NUM
+ 2301 FORMAT(('./out/TE_data_IDV=', I0, '.dat'))
 C
 C
       OPEN(UNIT=111,  FILE='./out/TE_data_inc.dat')
-      OPEN(UNIT=1000, FILE='./out/TE_data_IDV=0.dat')
+      OPEN(UNIT=1000, FILE=OUTPUT_FNAME)
 C
 C
 C  Simulation Loop
@@ -410,9 +434,6 @@ C
 C
       CLOSE(UNIT=111)
  	   CLOSE(UNIT=1000)
-      STOP
-
-
       END
 C
 C=============================================================================

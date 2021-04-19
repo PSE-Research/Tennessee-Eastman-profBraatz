@@ -12,6 +12,14 @@ C                          Kingsport, Tennessee 37662
 C
 C--------------------------------------------------------------------
 C
+C  This version is used to generate the original TEP dataset.
+C
+C  The modifications are by:
+C     Chengyu HAN, cyhan@mail.buct.edu.cn
+C     Beijing University of Chemical Technology
+C
+C--------------------------------------------------------------------
+C
 C  New version is a closed-loop plant-wide control scheme for 
 C  the Tennessee Eastman Process Control Test Problem
 C				
@@ -319,17 +327,17 @@ C
 C    Example Disturbance:
 C    Change Reactor Cooling
 C
- 	XMV(1) = 63.053 + 0.
-	XMV(2) = 53.980 + 0.
-	XMV(3) = 24.644 + 0.    
-	XMV(4) = 61.302 + 0.
-	XMV(5) = 22.210 + 0.
-	XMV(6) = 40.064 + 0.
-	XMV(7) = 38.100 + 0.
-	XMV(8) = 46.534 + 0.
-	XMV(9) = 47.446 + 0.
-	XMV(10)= 41.106 + 0.
-	XMV(11)= 18.114 + 0.
+      XMV(1) = 63.053 + 0.
+      XMV(2) = 53.980 + 0.
+      XMV(3) = 24.644 + 0.    
+      XMV(4) = 61.302 + 0.
+      XMV(5) = 22.210 + 0.
+      XMV(6) = 40.064 + 0.
+      XMV(7) = 38.100 + 0.
+      XMV(8) = 46.534 + 0.
+      XMV(9) = 47.446 + 0.
+      XMV(10)= 41.106 + 0.
+      XMV(11)= 18.114 + 0.
 C
 C	SETPT(6)=SETPT(6) + 0.2
 C
@@ -343,21 +351,8 @@ C
 C
 C
 C
-	OPEN(UNIT=111,FILE='~/TE_data_inc.dat',STATUS='new')
-	OPEN(UNIT=1111,FILE='~/TE_data_mv1.dat',STATUS='new')
-	OPEN(UNIT=1112,FILE='~/TE_data_mv2.dat',STATUS='new')
-	OPEN(UNIT=1113,FILE='~/TE_data_mv3.dat',STATUS='new')
-	OPEN(UNIT=2111,FILE='~/TE_data_me01.dat',STATUS='new')
-	OPEN(UNIT=2112,FILE='~/TE_data_me02.dat',STATUS='new')
-	OPEN(UNIT=2113,FILE='~/TE_data_me03.dat',STATUS='new')
-	OPEN(UNIT=2114,FILE='~/TE_data_me04.dat',STATUS='new')
-	OPEN(UNIT=2115,FILE='~/TE_data_me05.dat',STATUS='new')
-	OPEN(UNIT=2116,FILE='~/TE_data_me06.dat',STATUS='new')
-	OPEN(UNIT=2117,FILE='~/TE_data_me07.dat',STATUS='new')
-	OPEN(UNIT=2118,FILE='~/TE_data_me08.dat',STATUS='new')
-	OPEN(UNIT=2119,FILE='~/TE_data_me09.dat',STATUS='new')
-	OPEN(UNIT=2120,FILE='~/TE_data_me10.dat',STATUS='new')
-	OPEN(UNIT=2121,FILE='~/TE_data_me11.dat',STATUS='new')
+      OPEN(UNIT=111,  FILE='./out/TE_data_inc.dat')
+      OPEN(UNIT=1000, FILE='./out/TE_data_IDV=0.dat')
 C
 C
 C  Simulation Loop
@@ -413,21 +408,8 @@ C
 		PRINT *, 'Simulation is done. '
 
 C
- 	CLOSE(UNIT=111)
-	CLOSE(UNIT=1111)
-	CLOSE(UNIT=1112)
-	CLOSE(UNIT=1113)
-	CLOSE(UNIT=2111)
-	CLOSE(UNIT=2112)
-	CLOSE(UNIT=2113)
-	CLOSE(UNIT=2114)
-	CLOSE(UNIT=2115)
-	CLOSE(UNIT=2116)
-	CLOSE(UNIT=2117)
-	CLOSE(UNIT=2118)
-	CLOSE(UNIT=2119)
-	CLOSE(UNIT=2120)
-  	CLOSE(UNIT=2121)
+      CLOSE(UNIT=111)
+ 	   CLOSE(UNIT=1000)
       STOP
 
 
@@ -1341,23 +1323,8 @@ C
       DOUBLE PRECISION XMEAS, XMV
       COMMON/PV/ XMEAS(41), XMV(12)
 C
-        WRITE(1111,100) XMV(1), XMV(2), XMV(3), XMV(4)
-      	WRITE(1112,100) XMV(5), XMV(6), XMV(7), XMV(8)
-      	WRITE(1113,100) XMV(9), XMV(10), XMV(11), XMV(12)
-      	WRITE(2111,100) XMEAS(1), XMEAS(2), XMEAS(3), XMEAS(4)
-      	WRITE(2112,100) XMEAS(5), XMEAS(6), XMEAS(7), XMEAS(8)
-      	WRITE(2113,100) XMEAS(9), XMEAS(10), XMEAS(11), XMEAS(12)
-     	WRITE(2114,100) XMEAS(13), XMEAS(14), XMEAS(15), XMEAS(16)
-      	WRITE(2115,100) XMEAS(17), XMEAS(18), XMEAS(19), XMEAS(20)
-      	WRITE(2116,100) XMEAS(21), XMEAS(22), XMEAS(23), XMEAS(24)
-      	WRITE(2117,100) XMEAS(25), XMEAS(26), XMEAS(27), XMEAS(28)
-      	WRITE(2118,100) XMEAS(29), XMEAS(30), XMEAS(31), XMEAS(32)
-      	WRITE(2119,100) XMEAS(33), XMEAS(34), XMEAS(35), XMEAS(36)
-      	WRITE(2120,100) XMEAS(37), XMEAS(38), XMEAS(39), XMEAS(40)
-      	WRITE(2121,300) XMEAS(41)
- 100  FORMAT(1X,E13.5,2X,E13.5,2X,E13.5,2X,E13.5)
- 200  FORMAT(1X,E13.5,2X,E13.5,2X,E13.5)
- 300  FORMAT(1X,E13.5)
+      WRITE(1000, 1000) XMEAS, XMV(1:11)
+ 1000 FORMAT(52(1X, ES15.7))
 C
       RETURN
       END

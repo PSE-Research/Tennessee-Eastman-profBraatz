@@ -1,3 +1,4 @@
+! Copied and modified from: `temain_mod.f`
 C
 C               Tennessee Eastman Process Control Test Problem
 C
@@ -1393,4 +1394,3 @@ C
 C
       RETURN
       END
-

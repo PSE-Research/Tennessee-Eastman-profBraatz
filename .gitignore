@@ -1,2 +1,6 @@
 # dataset output
 out/
+
+# binary
+te_gen_dataset
+*.exe
